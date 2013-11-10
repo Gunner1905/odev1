@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+
+int main(){
+
+int tahta[5][5]={0};
+int bas_yatay,bas_dikey,bit_yatay,bit_dikey;
+
+int manhattan=0;
+int i,j;
+int k,l;
+label:
+printf("Baslangic noktasinin koordinatlarini giriniz:(Sirasiyla yatay ve dikey)\n");
+scanf("%d %d",&bas_yatay,&bas_dikey);
+
+printf("Bitis noktasini giriniz:(Sirasiyla yatay ve dikey\n");
+scanf("%d %d",&bit_yatay,&bit_dikey);
+
+if(bas_yatay==bit_yatay && bas_dikey==bit_dikey){
+    printf("Baslangic ve bitis noktalari ayni olamaz!\n");
+    goto label;
+}
+printf("Satranc tahtamiz:\n");
+tahta[bas_yatay-1][bas_dikey-1]=1; //matris [0,4] arasini gsoterdigi icin
+tahta[bit_yatay-1][bit_dikey-1]=2; // baslangic noktasi 1, bitis noktasi 2 olsun.
+for(i=0;i<5;i++){
+for(j=0;j<5;j++){
+    printf("%d",tahta[i][j]);
+}
+printf("\n");
+}
+    int a=bas_yatay;
+    int b=bas_dikey;
+    srand(time(NULL));
+    int matris[5][5]={0};
+    printf("[%d][%d] noktasindan harekete basliyoruz\n",a,b);
+    etiket:
+    do{  // bitis noktasini bulana kadar
+       do{ //matristen disari cikmamasi icin
+
+           int islem=rand()%3+1;
+            if(islem==1){
+                i=i+3;
+                j=j+1;
+                if(i>5 || j>5){
+            goto etiket;
+        }
+            }
+            else if(islem==2){
+                i=i+1;
+                j=j+3;
+                if(i>5 || j>5){
+            goto etiket;
+        }
+            }
+            else if(islem==3){
+                i=i-3;
+                j=j-1;
+            if(i>5 || j>5){
+            goto etiket;
+        }
+            }
+            else if(islem==4){
+                i=i-1;
+                j=j-3;
+            if(i>5 || j>5){
+            goto etiket;
+        }
+            }
+        }while(i<=5 && j<=5);
+
+     printf("\nAtin bir sonraki konumu:\n");
+     for(k=0;k<5;i++){
+        for(l=0;l<5;j++){
+            printf("%d",tahta[i][j]);
+        }
+        printf("\n");
+     }
+
+
+    }while(i==bit_yatay && j==bit_dikey);
+
+return 0;
+getch();
+}
